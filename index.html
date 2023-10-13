@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Unit Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Unit Converter</h1>
+        <label for="fromUnit">From:</label>
+        <select id="fromUnit">
+            <option value="meter">Meter (m)</option>
+            <option value="kilogram">Kilogram (kg)</option>
+            <option value="celsius">Celsius (°C)</option>
+            <option value="liter">Liter (L)</option>
+        </select>
+        <input type="number" id="inputValue" placeholder="Enter value">
+        <label for="toUnit">To:</label>
+        <select id="toUnit">
+            <option value="meter">Meter (m)</option>
+            <option value="kilogram">Kilogram (kg)</option>
+            <option value="celsius">Celsius (°C)</option>
+            <option value="liter">Liter (L)</option>
+        </select>
+        <p>Result: <span id="result">0.0</span></p>
+        <button onclick="convert()">Convert</button>
+    </div>
+
+    <script>
+        function convert() {
+            const fromUnit = document.getElementById("fromUnit").value;
+            const toUnit = document.getElementById("toUnit").value;
+            const inputValue = parseFloat(document.getElementById("inputValue").value);
+            let result = 0;
+
+            if (fromUnit === toUnit) {
+                result = inputValue;
+            } else if (fromUnit === "meter" && toUnit === "kilogram") {
+                result = inputValue * 0.45359237; // Conversion from meters to kilograms
+            } else if (fromUnit === "kilogram" && toUnit === "meter") {
+                result = inputValue * 2.20462; // Conversion from kilograms to meters
+            } else if (fromUnit === "celsius" && toUnit === "fahrenheit") {
+                result = (inputValue * 9/5) + 32; // Celsius to Fahrenheit
+            } else if (fromUnit === "fahrenheit" && toUnit === "celsius") {
+                result = (inputValue - 32) * 5/9; // Fahrenheit to Celsius
+            } else if (fromUnit === "liter" && toUnit === "gallon") {
+                result = inputValue * 0.264172; // Conversion from liters to gallons
+            } else if (fromUnit === "gallon" && toUnit === "liter") {
+                result = inputValue * 3.78541; // Conversion from gallons to liters
+            }
+
+            document.getElementById("result").textContent = result.toFixed(2);
+        }
+    </script>
+</body>
+</html>
